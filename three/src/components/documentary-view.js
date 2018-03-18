@@ -1,6 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Video } from 'expo'
+import VideoPlayer from '@expo/videoplayer'
+
 import { path } from 'ramda'
 
 import Header from './header'
@@ -12,10 +14,14 @@ const Documentary = ({ doc }) => (
     <Header cancel />
     <View style={[styles.container]}>
       <Text style={{ fontSize: 48 }}>{doc.title}</Text>
-      <Video
-        shouldPlay
-        style={styles.video}
-        source={{ uri: path(['video', 'uri'], doc) }}
+      <VideoPlayer
+        videoProps={{
+          shouldPlay: true,
+          resizeMode: Video.RESIZE_MODE_CONTAIN,
+          source: { uri: path(['video', 'uri'], doc) }
+        }}
+        isPortrait={false}
+        playFromPositionMillis={0}
       />
       <Text style={{ fontSize: 24 }}>{doc.summary}</Text>
     </View>
