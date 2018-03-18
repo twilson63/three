@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 
 app.use('/documentaries', require('./documentaries'))
+app.use('/videos', require('./videos'))
 
 app.get('/', (req, res) => res.send({ name: 'three-api' }))
 

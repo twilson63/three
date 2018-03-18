@@ -1,5 +1,5 @@
 import React from 'react'
-import { API } from '../env'
+import { API, VIDEO_API } from '../env'
 
 import {
   View,
@@ -31,6 +31,7 @@ const Form = props => {
             icon="md-checkmark"
             cancel
             onPress={() => {
+              const cloud_file = new Date().toISOString() + '.mp4'
               fetch(API, {
                 method: 'POST',
                 headers: {
@@ -40,10 +41,32 @@ const Form = props => {
                   type: 'documentary',
                   title,
                   summary,
-                  video
+                  video: {
+                    uri: VIDEO_API + '/' + cloud_file
+                  }
                 })
               })
                 .then(res => {
+                  // Upload video
+                  let body = new FormData()
+                  body.append('video', {
+                    name: cloud_file,
+                    type: 'video/mp4',
+                    uri: video.uri
+                  })
+                  body.append('name', cloud_file)
+
+                  fetch(VIDEO_API, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'multipart/form-data'
+                    },
+                    body
+                  })
+                    .then(result => result.json())
+                    .then(res => console.log(res))
+                    .catch(err => console.log(err))
+
                   props.history.push('/')
                 })
                 .catch(err => {
