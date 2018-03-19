@@ -1,5 +1,17 @@
 {
   "expo": {
-    "sdkVersion": "25.0.0"
+    "name": "three6363",
+    "version": "1.0.0",
+    "slug": "three6363",
+    "description": "document your ideas and creative work",
+    "platforms": ["ios"],
+    "githubUrl": "https://github.com/twilson63/three",
+    "orientation": "landscape",
+    "sdkVersion": "25.0.0",
+    "ios": {
+      "bundleIdentifier": "com.twilson63.three6363"
+    },
+    "scheme": "three",
+    "icon": "three6363.png"
   }
 }
